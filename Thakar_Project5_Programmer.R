@@ -7,7 +7,11 @@
 #BiocManager::install("hgu133plus2.db")
 
 ###### set working directory to where the .CEL files are 
+<<<<<<< HEAD
+setwd("/projectnb2/bf528/users/dachshund/project_1/samples/all_samples")
+=======
 setwd("/usr4/bf528/athakar")
+>>>>>>> afa23c9f9ad82ac5ad0fb08a00965bb6bc22f10b
 #To see working directory
 # getwd()
 
@@ -26,7 +30,11 @@ library(ggplot2)
 ####RMA expression ---
 
 # read .CEL files in current directory and normalize them
+<<<<<<< HEAD
+data <- ReadAffy()
+=======
 data <- ReadAffy(celfil.path='/projectnb2/bf528/users/dachshund/project_1/samples')
+>>>>>>> afa23c9f9ad82ac5ad0fb08a00965bb6bc22f10b
 normalized_data <- rma(data)
 
 #### fitPLM ---
@@ -85,6 +93,20 @@ boxplot(PC2)
 which(PC2 > mean(PC2) +3*sd(PC2) | PC2 < mean(PC2)-3*sd(PC2))
 
 id <- which(!(PC2 > mean(PC2) +3*sd(PC2) | PC2 < mean(PC2) - 3*sd(PC2) | PC1 > mean(PC1) + 3*sd(PC1) | PC1 < mean(PC1) - 3*sd(PC1)))
+<<<<<<< HEAD
+
+#outliers PCA
+PCA_no_outliers <- prcomp(untransposed_scaled[,id],scale.=FALSE,center=FALSE)
+PC1_no_outliers <- PCA_no_outliers$rotation[,1]
+PC2_no_outliers <- PCA_no_outliers$rotation[,2]
+summarized_no_outliers <- summary(PCA_no_outliers)
+summarized_no_outliers$importance
+plot(PC2_no_outliers, PC1_no_outliers, 
+     xlab = paste0("PC2-no outliers (", round(summarized_no_outliers$importance[2,2]*100, digits = 2), "%)"),
+     ylab = paste0("PC1-no outliers (", round(summarized_no_outliers$importance[2,1]*100, digits = 2), "%)"))
+
+=======
+>>>>>>> afa23c9f9ad82ac5ad0fb08a00965bb6bc22f10b
 final_data <- (batch_corrected[,id])
 write.csv(final_data, file="final_data.csv")
 
